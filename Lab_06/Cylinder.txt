@@ -1,0 +1,30 @@
+public class Cylinder extends Circle
+{
+    private double height; // height of the cylinder
+
+    // Default constructor
+    public Cylinder()
+    {
+        super();
+        this.height = 0.0;
+    }
+
+    // Constructor with parameters
+    public Cylinder(double xValue, double yValue, double radius, double height)
+    {
+        super(xValue, yValue, radius);
+        this.height = height;
+    }
+
+    // convert Cylinder into String representation
+    public String toString()
+    {
+        return super.toString() + String.format(", %.2f", height);
+    }
+
+    // convert Cylinder into area 
+    public double area()
+    {
+        return (super.circumference() * height) + (2 * super.area());
+    }
+}

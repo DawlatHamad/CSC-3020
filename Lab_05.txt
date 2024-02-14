@@ -1,0 +1,102 @@
+public class TestAccount
+{
+	public static void main(String[] args) {
+	    // Objects
+		CheckingAccount checking = new CheckingAccount( 25.0, 1, 35.0);
+		SavingAccount saving = new SavingAccount(0.05, 2, 25.0);
+		
+		// Before
+		System.out.println("Account Before Witdrawing");
+		System.out.println(CheckingAccount.toString());
+		System.out.println();
+		System.out.println(SavingAccount.toString());
+		
+		// Withdraw
+		checking.withdraw(10);
+		saving.withdraw(10);
+		
+		// After
+		System.out.println("Account After Witdrawing");
+		System.out.println(CheckingAccount.toString());
+		System.out.println();
+		System.out.println(SavingAccount.toString());
+		
+		
+	}
+}
+
+class Account {
+  private int id;
+  private double balance;
+
+
+  public Account(int newId, double newBalance) {
+    id = newId;
+    balance = newBalance;
+  }
+
+  public int getId() {
+    return this.id;
+  }
+
+  public double getBalance() {
+    return balance;
+  }
+
+  public void setId(int newId) {
+    id = newId;
+  }
+
+  public void setBalance(double newBalance) {
+    balance = newBalance;
+  }
+
+  public void withdraw(double amount) {
+    balance -= amount;
+  }
+
+  public void deposit(double amount) {
+    balance += amount;
+  }
+
+  @Override
+  public String toString() {
+    return "Account id: "+ id +"\nAccount balance: "+ balance;
+  }
+}
+
+class CheckingAccount extends Account {
+    // Data Field
+    private double fee;
+    
+    // Constructor
+    public CheckingAccount(double fee, int id, double balance) {
+        super(id, balance);
+        this.fee = fee;
+    }
+    
+    //toString
+    @Override
+    public String toString() {
+        System.out.println("Checking Account " + "Monthly Fee" + fee);
+        return super.toString();
+    }
+}
+
+class SavingAccount extends Account {
+    // Data Field
+    private double rate;
+    
+    // Constructor
+    public SavingAccount(double rate, int id, double balance) {
+        super(id, balance);
+        this.rate = rate;
+    }
+    
+    //toString
+    @Override
+    public String toString() {
+        System.out.println("Saving Account " + "Interest Rate" + rate);
+        return super.toString();
+    }
+}

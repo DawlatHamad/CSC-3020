@@ -1,0 +1,56 @@
+// PART ONE
+// Source: https://www.techiedelight.com/generate-random-character-java/#:~:text=1.,method%20from%20the%20Random%20class.
+
+import java.util.Random;
+
+public class Lab01
+{
+	public static void main(String[] args) {
+        //Random Genorator
+        Random random = new Random();
+        
+        //3 letters
+        char letter1 = (char)(random.nextInt(26) + 'A');
+        char letter2 = (char)(random.nextInt(26) + 'A');
+        char letter3 = (char)(random.nextInt(26) + 'A');
+        
+        //4 numbers
+        int number1 = random.nextInt(10);
+        int number2 = random.nextInt(10);
+        int number3 = random.nextInt(10);
+        int number4 = random.nextInt(10);
+        
+        //Display Intro Line
+        System.out.print("A random vehicle plate number: " + letter1 + letter2 + letter3 + number1 + number2 + number3 + number4);
+	}
+}
+
+// PART TWO
+import java.util.Scanner;
+
+public class Lab01
+{
+	public static void main(String[] args) {
+		//Input
+		Scanner input = new Scanner(System.in);
+        System.out.print("Enter the first 9 digits of an ISBN as integer: ");
+        int nineDigit_ISBN = input.nextInt();
+		
+		//Process
+		int digitSum = 0;
+		int formulaDigit = nineDigit_ISBN;
+		for (int i = 9; i > 0; i--) {
+            digitSum += formulaDigit % 10 * i;
+            formulaDigit = formulaDigit / 10;
+        }
+        digitSum = digitSum % 11; 
+        
+        //Output
+		if (digitSum == 10) {
+		    System.out.print("The ISBN-10 number is " + nineDigit_ISBN + "X");
+		}
+		else {
+		    System.out.print("The ISBN-10 number is " + nineDigit_ISBN + digitSum);
+		}
+	}
+}

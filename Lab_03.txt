@@ -1,0 +1,50 @@
+
+import java.util.Scanner;
+
+public class Lab03 {
+    public static void main(String[] args) {
+        //Print the 3x3 or the 2x2 Array
+        Scanner scanner = new Scanner(System.in);
+        int size = (int)(2 + Math.random() * 2);
+        double[][] matrix = new double[size][size];
+        System.out.println("Enter a " + size + " by " + size + " matrix row by row:");
+
+        //Prompt user for input
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = scanner.nextDouble();
+            }
+        }
+
+        //Output
+        if (isMarkovMatrix(matrix)) {
+            System.out.println("It is a Markov matrix.");
+        } 
+        else {
+            System.out.println("It is not a Markov matrix.");
+        }
+    }
+    
+    private static boolean isMarkovMatrix(double[][] m) {
+        //Positive Number
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m.length; j++) {
+                if (m[i][j] < 0) {
+                    return false;
+                }
+            }
+        }
+
+        //Sum 
+        for (int i = 0; i < m.length; i++) {
+            double sum = 0;
+            for (int j = 0; j < m.length; j++) {
+                sum += m[i][j];
+            }
+            if (sum != 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+}

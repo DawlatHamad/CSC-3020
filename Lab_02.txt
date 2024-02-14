@@ -1,0 +1,57 @@
+// Source 1: https://www.geeksforgeeks.org/java-string-tochararray-example/
+// Source 2: https://liveexample.pearsoncmg.com/html/CountLettersInArray.html
+
+import java.util.Scanner;
+
+public class Lab02 {
+    public static void main(String[] args) {
+        
+        //Scanner
+        Scanner input = new Scanner(System.in);
+        String choice;
+
+        // Input
+        do {
+            
+            // Decalre Variable: Array
+            int[] count = new int[26];
+            
+            // Prompt user
+            System.out.println("Enter a line of text: ");
+            String text = input.nextLine();
+            
+
+            // Count occurrences
+            for (int i = 0; i < text.length(); i++) {
+                char ch = Character.toUpperCase(text.charAt(i));
+                if (Character.isLetter(ch)) {
+                    int index = getIndex(ch);
+                    count[index]++;
+                }
+            }
+
+            // Output
+            System.out.print("");
+            for (char ch = 'A'; ch <= 'Z'; ch++) {
+                int index = getIndex(ch);
+                if (count[index] > 0) {
+                    System.out.println(ch + ": " + count[index]);
+                }
+            }
+
+            // Repeat
+            System.out.println("Enter another line? (y for 'yes'), (n for 'no')");
+            choice = input.nextLine();
+
+        } while (choice.equals("y"));
+
+        System.out.println(" ");
+    }
+
+    // Index Method
+    private static int getIndex(char ch) {
+        return Character.toUpperCase(ch) - 'A';
+    }
+
+    
+}

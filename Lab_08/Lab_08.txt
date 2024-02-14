@@ -1,0 +1,79 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            // Prompt User for Input
+            System.out.print("Enter the input file name: ");
+            Scanner scanner = new Scanner(System.in);
+            String inputFile = scanner.nextLine();
+
+            // Read InputFile
+            String outputFile = readFile(inputFile);
+
+            // Write Output File
+            System.out.print(inputFile + " has ");
+            display(outputFile);
+        }
+
+        // Exception
+        catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+    
+    // Read File
+    private static String readFile(String inputFile) throws IOException {
+        StringBuilder outputFile = new StringBuilder();
+        try (FileReader fileReader = new FileReader(inputFile)) {
+            int c;
+            while ((c = fileReader.read()) != -1) {
+                outputFile.append((char) c);
+            }
+        }
+        return outputFile.toString();
+    }
+
+    // Output File
+    private static void display(String outputFile) {
+        // Declare Variables
+        int lineCount = outputFile.split("\n").length;
+        int wordCount = outputFile.split("\\s+").length;
+        
+        // Display the output
+        try (FileWriter fileWriter = new FileWriter("letterCount.txt")) {
+            System.out.print(lineCount + " lines " + wordCount + " words.");
+            System.out.println("Occurrences of each letter:");
+            
+            for (char c = 'a'; c <= 'z'; c++) {
+                int occurrences = countOccurrences(outputFile, c);
+                
+                // Display in console
+                if (occurrences > 0) {
+                    System.out.println("Letter: " + c + ", Occurrences: " + occurrences);
+                    
+                    // Write in Output File
+                    fileWriter.write("Letter: " + c + ", Occurrences: " + occurrences + "\n");
+                }
+            }
+            
+            System.out.println();
+            
+        } 
+        catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    // Count letters
+    private static int countOccurrences(String file, char letter) {
+    int count = 0;
+    char[] charArray = file.toCharArray();
+    for (int i = 0; i < charArray.length; i++) {
+        if (Character.toLowerCase(charArray[i]) == letter) {
+            count++;
+        }
+    }
+    return count;
+}

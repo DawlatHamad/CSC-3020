@@ -1,0 +1,59 @@
+import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+
+public class TestGeometricObject {
+    /** Main method */
+    public static void main(String[] args) {
+        /** Create Two Arrays */
+        GeometricObject[] array1 = {
+          new Circle(5.0),
+          new Circle(6.0),
+          new Rectangle(2.0, 3.0),
+          new Rectangle(3.0, 4.0)
+        };
+        
+        ArrayList<GeometricObject> array2 = new ArrayList<GeometricObject>();
+        array2.add(new Rectangle(10.0, 20.0));
+        array2.add(new Rectangle(20.0, 30.0));
+        array2.add(new Circle(5.0));
+        array2.add(new Circle(15.0));
+        
+        /** Before Sort */
+        System.out.println("Before sorting GeometricObjects list:");
+        display(array1);
+        
+        /** Sort Array */
+        Arrays.sort(array1);
+        
+        /** After Sort */
+        System.out.println("After sorting GeometricObjects list:");
+        display(array1);
+        System.out.println();
+        
+        /** Search Method */
+        GeometricObject rectangle = new Rectangle(10.0, 20.0);
+        GeometricObject circle = new Circle(15.0);
+        
+        int rectangleIndex = search(array2, rectangle);
+        int circleIndex = search(array2, circle);
+        
+        System.out.println();
+        System.out.println(rectangle + " is found at index " + rectangleIndex);
+        System.out.println(circle + " is found at index " + circleIndex);
+    }
+    
+    /** Display method */
+    static void display(GeometricObject[] array) {
+        for (int i = 0; i < array.length; i++) {
+            GeometricObject obj = array[i];
+            System.out.print(String.format("%.1f ", obj.getPerimeter()));
+        }
+        System.out.println();
+    }
+
+    /** Search method */
+    static int search(ArrayList<GeometricObject> list2, GeometricObject element) {
+        return list2.indexOf(element);
+    }
+}
